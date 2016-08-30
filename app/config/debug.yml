@@ -1,0 +1,11 @@
+logging:
+    enabled: true
+    show_hashs: false
+performance:
+    leak_canary: true
+    dev_metrics: true
+    stetho: true
+errors:
+    rethrow: false
+crashes:
+    enabled: false

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Follow the steps"
+        >
+
+        <Preference
+            android:key="@string/serviceEnabledKey"
+            android:title="@string/title"
+            android:summary="@string/summary"
+            />
+
+        <Preference android:title="@string/accessibility_title"
+            android:key="@string/accessibility_title"
+            android:summary="@string/accessibility"
+            />
+
+        <Preference android:title="@string/screenshot"
+            android:key="@string/screenshot"
+            android:summary="@string/screenshot_description"
+            />
+
+        <Preference android:title="@string/go"
+            android:key="@string/go"
+            android:summary="@string/best_candycrush"
+            android:selectable="false"
+            />
+
+        <Preference
+            android:title="@string/tuto"
+            android:key="@string/tuto"
+            android:summary="@string/tuto_desc"
+            android:selectable="true"
+            />
+
+        <ListPreference
+            android:title="@string/choice_title"
+            android:key="@string/choice_title"
+            android:summary="@string/choose_careful"
+            android:entries="@array/listentries"
+            android:entryValues="@array/listvalues"
+            android:defaultValue="@string/choice_best"
+            />
+
+        <Preference
+            android:key="@string/go"
+            android:summary="@string/quit"
+            android:selectable="false"
+            />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

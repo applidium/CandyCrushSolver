@@ -1,0 +1,43 @@
+import java.util.regex.Matcher
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+void bumpVersionCodeInFile(File file) {
+    def text = file.text
+    def matcher = (text =~ /versionCode ([0-9]+)/)
+    if (!didMatch(matcher)) {
+        throw new GradleException("Could not find versionCode in app/build.gradle")
+    }
+    def String versionCodeStr = matcher[0][1]
+    def versionCode = Integer.valueOf(versionCodeStr)
+    def newVersionCode = versionCode + 1
+    def newContent = matcher.replaceFirst("versionCode " + newVersionCode)
+    file.write(newContent)
+}
+
+private boolean didMatch(Matcher matcher) {
+    matcher.size() == 1 && matcher.hasGroup()
+}
+
+task('bumpVersionCode') << {
+    bumpAppVersion()
+    bumpWearVersion()
+}
+
+private void bumpWearVersion() {
+    def wearGradleFile = file('wear/build.gradle')
+    if (wearGradleFile.canRead()) {
+        bumpVersionCodeInFile(wearGradleFile)
+    }
+}
+
+private void bumpAppVersion() {
+    def appGradleFile = file('app/build.gradle')
+    if (!appGradleFile.canRead()) {
+        throw new GradleException("Could not read app/build.gradle");
+    }
+    bumpVersionCodeInFile(appGradleFile)
+}
+

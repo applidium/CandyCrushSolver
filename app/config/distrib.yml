@@ -1,0 +1,15 @@
+logging:
+    enabled: false
+    show_hashs: false
+performance:
+    leak_canary: false
+    dev_metrics: false
+    stetho: false
+errors:
+    rethrow: false
+crashes:
+    enabled: true
+    additional_data: true
+    max_network: 100
+    max_trace: 100
+    max_component: 100

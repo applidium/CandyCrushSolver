@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listentries">
+        <item>Display the best move</item>
+        <item>Display every move</item>
+    </string-array>
+    <string-array name="listvalues">
+        <item>Display the best move</item>
+        <item>Display every move</item>
+    </string-array>
+</resources>

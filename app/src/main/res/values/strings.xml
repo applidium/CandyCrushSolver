@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Global -->
+    <string name="app_name">Candy Crush Solver</string>
+
+    <!-- Preferences -->
+    <string name="serviceEnabledKey">serviceEnabledKey</string>
+    <string name="title">Drawing on top enabled</string>
+    <string name="summary">It allows to draw Candy Crush solutions on your screen, on top of other applications.</string>
+    <string name="best_candycrush">Start the solver !</string>
+    <string name="accessibility_title">Accessibility rights</string>
+    <string name="accessibility">Necessary for us to know when you are on Candy Crush App. We do not analyze your screen until then.</string>
+    <string name="go">Go to Candy Crush</string>
+    <string name="screenshot">Start screen recording</string>
+    <string name="screenshot_stop">Stop screen recording</string>
+    <string name="screenshot_description">We need records to find Candy Crush Sweets.</string>
+    <string name="quit">Hint : to stop your Candy Crush Solver, just turn off one of the buttons above.</string>
+    <string name="accessibility_service_description">Candy Crush Solver is an application that solves Candy Crush. When accessibility is activated, it looks for the game and analyzes it. If you do not want Candy Crush Solver to see your screen anymore, you can remove accessibility access at any moment, by turning off the switch above.</string>
+    <string name="tuto">Tutorial</string>
+    <string name="tuto_desc">Learn how to use Candy Crush Solver</string>
+    <string name="tuto_button">Get started !</string>
+    <string name="pref_previously_started">Once</string>
+    <string name="api_under_23">Overlay permission is always on for API under 23. You cannot disable it.</string>
+    <string name="choice_every">Display every move</string>
+    <string name="choice_best">Display the best move</string>
+    <string name="choice_title">Option display</string>
+    <string name="choose_careful">We advise you to stay in default mode (display the best move), as it will be clearer and simpler.</string>
+
+    <!-- Notification -->
+    <string name="notificationTitle">Candy Crush Solver running</string>
+    <string name="notificationText">Tap to configure.</string>
+    <string name="start_service_best">Cheater started : best move will be displayed</string>
+    <string name="start_service_every">Cheater started : every move will be displayed</string>
+    <string name="stop_service">Cheater stopped</string>
+    <string name="notificationGo">Open in app</string>
+    <string name="notificationQuit">Quit</string>
+
+    <!-- Errors -->
+    <string name="err_image">Screenshot missed, new try…</string>
+    <string name="err_grid">Grid not recognized, new try…</string>
+    <string name="err_move">Could not find a real move, new try…</string>
+    <string name="err_opencv">Error : could not load OpenCV library</string>
+    <string name="quit_candycrush">Cheater stopped : restart it in app</string>
+    <string name="candy_not_installed">Candy Crush is not installed on your phone</string>
+
+</resources>
