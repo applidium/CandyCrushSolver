@@ -24,12 +24,12 @@ Finally, if you want to use analytics or crash reporting, everything is ready in
 
 `MainActivity` starts when the user launches the app, with its `SettingsFragment`. Several permissions are needed before beginning : overlay permission, accessibility access. Another button is here to start taking screenshots. When these three permissions are unlocked, our `HeadService starts`.
 
-Besides, `TutoActivity`, and other tuto fragments compose a little tutorial. 
+Besides, `TutoActivity`, and other tuto fragments compose a little tutorial.
 The `PermissionChecker` helps to know when overlay permission is on.
 
 ### Screenshot
 
-Most of the code lays in the same named class. Once started in `SettingsFragment`, a new capture is saved each time the `ImageReader.OnImageAvailableListener` detects a change in the screen. The image is saved in the internal storage of the phone.
+Most of the code lays in the same named class. Once started in `SettingsFragment`, a new capture is saved every second. The image is saved in the internal storage of the phone.
 
 ### Accessibility
 
@@ -49,8 +49,7 @@ Then the app launches the `BusinessService` at regular intervals.
 
 The `BusinessService calls the `FeaturesExtractor` and let the engine work. Several methods can be used here :
 
-1. Call `private List<Sweet> extractSweetsForFeature(Mat img, int feature, int i, int orientation)` if you prefer a quick recognition. This function uses the pixel colors to find Candy Crush sweets. The integer `feature` represents its color code. But this methods won't be efficient for a black and white pattern. We chose this one in our solver, because the the algorithm performances are far better.
-(Note : this recognition is not as precise as the next one, so don't forget to center your final display)
+1. Call `private List<Sweet> extractSweetsForFeature(Mat img, int feature, int i, int orientation)` if you prefer a quick recognition. This function uses the pixel colors to find Candy Crush sweets. The integer `feature` represents its color code. But this methods won't be efficient for a black and white pattern. We chose this one in our solver, because the the algorithm performances are far better. (Note : this recognition is not as precise as the next one, so don't forget to center your final display)
 
 2. Call `public List<Sweet> extractSweetsForFeatureWithOpenCV(Mat img, Mat feature, int i)` if you prefer a really precise recognition. However, it is really slower (but depends of the size of your screenshot).
 
@@ -60,11 +59,11 @@ The engine also contains a `FeaturePainter` that can help you see the results of
 
 Then the class `MoveFinder` works to find every move on the screen, and gives at the end the best one. The numerous booleans present aim to find special moves (will 4 sweets be aligned ? Or 5 ? Or can I make a sweet bomb with this move ?). If the algorithm seems a bit confusing, find explanation on our [blogpost][].
 
-[blogpost]: https://www.youtube.com/watch?v=OTw_GIQNbD8
+[blogpost]: https://applidium.com/en/news/candy_crush_solver/
 
 ### Solution display
 
-Finally, the object HeadLayer represents the overlay on which we can draw. Here is the global setup : 
+Finally, the object HeadLayer represents the overlay on which we can draw. Here is the global setup :
 
 ```java
 private WindowManager.LayoutParams params = new WindowManager.LayoutParams(
@@ -95,7 +94,7 @@ In our case, we chose to display the solution as a black transparent bitmap, wit
 
 ## Make your own game solver !
 
-This project aims to be as general as possible, in order to be reused for other logic game resolution. We encourage you to create your own solver, based on this project. For example, feel free to develop a sudoku solver ! 
+This project aims to be as general as possible, in order to be reused for other logic game resolution. We encourage you to create your own solver, based on this project. For example, feel free to develop a sudoku solver !
 
 ## Known bugs
 
