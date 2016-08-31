@@ -137,7 +137,11 @@ public class BusinessService extends Service {
         }
         try {
             Mat[] featuresOpenCV = loadFeaturesForOpenCvVersion();
+
             recenterSweet(best, resizeImage, featuresOpenCV);
+            Move opposedMove = new Move(best.getSweet2(), best.getSweet1(), best.getScore());
+            recenterSweet(opposedMove, resizeImage, featuresOpenCV);
+
             Timber.v("App cycle : move just found");
             headLayer.showBestMoveOnScreen(best, density);
             Timber.v("App cycle : move on screen");
