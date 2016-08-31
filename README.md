@@ -37,10 +37,9 @@ The `HeadService` checks if the user is on Candy Crush or not. It won't start an
 
 ```java
 if (event.getPackageName().toString().equals("com.king.candycrushsaga") && Math.abs(lastModDate.getTime() - d.getTime()) < TIME_LIMIT) {
-            launchBusinessService();
-        } else {
-            stopBusinessService();
-        }
+    launchBusinessService();
+} else {
+    stopBusinessService();
 }
 ```
 
@@ -69,25 +68,25 @@ Finally, the object HeadLayer represents the overlay on which we can draw. Here 
 
 ```java
 private WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.TYPE_PHONE,
-           WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-            PixelFormat.TRANSLUCENT);
+    WindowManager.LayoutParams.WRAP_CONTENT,
+    WindowManager.LayoutParams.WRAP_CONTENT,
+    WindowManager.LayoutParams.TYPE_PHONE,
+    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+    PixelFormat.TRANSLUCENT
+);
 ```
 
 And then you can add whatever you wan on the layout :
 
 ```java
 private void addToWindowManager() {
-        windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        windowManager.addView(frameLayout, params);
+    windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+    windowManager.addView(frameLayout, params);
 
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        layoutInflater.inflate(R.layout.head, frameLayout);
-        image = (ImageView) frameLayout.findViewById(R.id.solution);
-    }
+    layoutInflater.inflate(R.layout.head, frameLayout);
+    image = (ImageView) frameLayout.findViewById(R.id.solution);
 }
 ```
 
