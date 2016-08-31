@@ -15,7 +15,6 @@ import org.opencv.imgproc.Imgproc;
 import java.util.List;
 
 public class FeaturesExtractorTest extends BaseTest {
-    // https://gist.github.com/robb-broome/9222746
 
     @Test
     public void test() throws Exception {

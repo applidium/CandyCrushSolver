@@ -5,7 +5,8 @@ This service scans the grid to find sweets, find the best move for the player an
 
 ## Setup
 
-This project uses the Android version of OpenCV libraries. 
+This project uses the Android version of OpenCV libraries.
+If you need to install OpenCV on OS X, you can follow [these instructions][openCV setup]
 If our setup doesn't work on your computer, we advise you to follow this [tutorial][].
 
 In order to run the tests, you might want to add `-Djava.library.path=src/test` to your VM options if you want to run your tests outside of gradle.
@@ -13,6 +14,7 @@ In order to run the tests, you might want to add `-Djava.library.path=src/test` 
 
 Finally, if you want to use analytics or crash reporting, everything is ready in the code : just add an HockeyApp key to `/keystore/release.properties` (variable `keyAlias`). To get your own key, go to [HockeyApp website][] and create a new project.
 
+[openCV setup]: https://gist.github.com/robb-broome/9222746
 [tutorial]: https://www.youtube.com/watch?v=OTw_GIQNbD8
 [HockeyApp website]: https://hockeyapp.net
 
