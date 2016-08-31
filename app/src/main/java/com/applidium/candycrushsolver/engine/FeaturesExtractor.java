@@ -23,6 +23,8 @@ public class FeaturesExtractor {
     private static final int OTHER_PIXEL = 10;
     private static int DIFFERENCE_LIMIT = 20;
     private static final int DIFFERENCE_LIMIT_OTHER = 45;
+    private static int minHeight;
+    private static int minWidth;
 
     public List<List<Sweet>> extractFeaturesFromImage(Mat img, int [] features, int orientation) {
         Timber.v("Running Template Matching");
@@ -39,6 +41,7 @@ public class FeaturesExtractor {
         List<List<Sweet>> grid = sortSweets(messySweets, colStep);
         alignGrid(grid, colStep);
         readjustGridWithSymmetry(grid);
+        fillGridForUnrecognizedCandies(grid, img, features, colStep);
 
         printFinalGrid(grid);
 
@@ -151,8 +154,8 @@ public class FeaturesExtractor {
         List<List<Sweet>> grid = new ArrayList<>();
 
         // Get minHeight and minWidth
-        int minHeight = Integer.MAX_VALUE;
-        int minWidth = Integer.MAX_VALUE;
+        minHeight = Integer.MAX_VALUE;
+        minWidth = Integer.MAX_VALUE;
         for (Sweet sweet : messySweets) {
             if (sweet.getY() < minHeight) {
                 minHeight = (int) sweet.getY();
@@ -162,11 +165,11 @@ public class FeaturesExtractor {
             }
         }
 
-        fillGrid(messySweets, colStep, grid, minHeight, minWidth);
+        fillGrid(messySweets, colStep, grid);
         return grid;
     }
 
-    private void fillGrid(List<Sweet> messySweets, double colStep, List<List<Sweet>> grid, int minHeight, int minWidth) {
+    private void fillGrid(List<Sweet> messySweets, double colStep, List<List<Sweet>> grid) {
         for (Sweet sweet : messySweets) {
             addSweetToGrid(grid, sweet, minHeight - 10, minWidth - 10, colStep);
         }
@@ -211,6 +214,38 @@ public class FeaturesExtractor {
         }
     }
 
+    private void fillGridForUnrecognizedCandies(List<List<Sweet>> grid, Mat img, int[] features, double colStep) {
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid.get(i).size(); j++) {
+                fillCellIfUnrecognized(grid, img, features, colStep, i, j);
+            }
+        }
+
+    }
+
+    private void fillCellIfUnrecognized(List<List<Sweet>> grid, Mat img, int[] features, double colStep, int i, int j) {
+        if (grid.get(i).get(j) == null) {
+            double x = j * colStep + minWidth;
+            double y = (i - 1) * colStep + minHeight;
+            //shift not to be on the border of a cell
+            int xCentered = (int) (x + colStep / 4);
+            int yCentered = (int) (y + colStep / 4);
+
+            fillWithRightColor(grid, img, features, i, j, x, y, xCentered, yCentered);
+        }
+    }
+
+    private void fillWithRightColor(List<List<Sweet>> grid, Mat img, int[] features, int i, int j, double x, double y, int xCentral, int yCentral) {
+        for (int colorIndex = 0; colorIndex < features.length; colorIndex++) {
+            if (img != null
+                    && img.get(Math.min(yCentral, img.rows()), Math.min(xCentral, img.cols())) != null
+                    && img.get(Math.min(yCentral, img.rows()), Math.min(xCentral, img.cols())).length > 0
+                    && isTheSameColor(img, features[colorIndex], Math.min(yCentral, img.rows()), Math.min(xCentral, img.cols()), 45)) {
+                grid.get(i).set(j, new Sweet(colorIndex, new Point(x, y)));
+                break;
+            }
+        }
+    }
 
     private static void deleteCloseOnes(List<Sweet> featureSweets) {
         for (int i = 0; i < featureSweets.size() - 1; i++) {
