@@ -5,6 +5,7 @@ public class Move {
 
     private final Sweet sweet1;
     private final Sweet sweet2;
+    private Direction direction;
 
     /* CALCULATING SCORES (not real score in the game, personal score to fond the best move) :
     1 : plain move
@@ -16,10 +17,11 @@ public class Move {
     */
     private int score;
 
-    public Move(Sweet sweet1, Sweet sweet2, int score) {
+    public Move(Sweet sweet1, Sweet sweet2, int score, Direction direction) {
         this.sweet1 = sweet1;
         this.sweet2 = sweet2;
         this.score = score;
+        this.direction = direction;
     }
 
     public Sweet getSweet1() {
@@ -34,19 +36,11 @@ public class Move {
         return score;
     }
 
-    public void addToScore(int nb) {
-        score += nb;
+    public Direction getDirection() {
+        return direction;
     }
 
-    public Direction findDirection() {
-        if (sweet1 == null || sweet2 == null) {
-            return null;
-        }
-        double horizontalDiff = sweet1.getX() -  sweet2.getX();
-        double verticalDiff = sweet1.getY() - sweet2.getY();
-        if (Math.abs(verticalDiff) > Math.abs(horizontalDiff)) {
-            return verticalDiff > 0 ? Direction.UP : Direction.DOWN;
-        }
-        return horizontalDiff > 0 ? Direction.LEFT : Direction.RIGHT;
+    public void addToScore(int nb) {
+        score += nb;
     }
 }

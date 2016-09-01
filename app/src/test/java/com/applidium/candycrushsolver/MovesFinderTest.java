@@ -36,9 +36,10 @@ public class MovesFinderTest extends BaseTest {
 
         MoveFinder mv = new MoveFinder(grid);
         Move best = mv.findMove();
-        Assert.assertEquals(best.findDirection(), Move.Direction.UP);
+        Assert.assertEquals(best.getDirection(), Move.Direction.UP);
         List<Move> moves = mv.getMoves();
         recenterMoves(image, moves);
+        Imgcodecs.imwrite("out_test.png", image);
         printMoves(movesPossible, moves, best, "out4.png");
     }
 
@@ -54,7 +55,7 @@ public class MovesFinderTest extends BaseTest {
 
         MoveFinder mv = new MoveFinder(grid);
         Move best = mv.findMove();
-        Assert.assertEquals(best.findDirection(), Move.Direction.LEFT);
+        Assert.assertEquals(best.getDirection(), Move.Direction.LEFT);
         List<Move> moves = mv.getMoves();
         printMoves(movesPossible, moves, best, "out5.png");
     }
@@ -70,7 +71,7 @@ public class MovesFinderTest extends BaseTest {
 
         MoveFinder mv = new MoveFinder(grid);
         Move best = mv.findMove();
-        Assert.assertEquals(best.findDirection(), Move.Direction.RIGHT);
+        Assert.assertEquals(best.getDirection(), Move.Direction.RIGHT);
         List<Move> moves = mv.getMoves();
         printMoves(movesPossible, moves, best, "out6.png");
     }
@@ -86,7 +87,7 @@ public class MovesFinderTest extends BaseTest {
 
         MoveFinder mv = new MoveFinder(grid);
         Move best = mv.findMove();
-        Assert.assertEquals(best.findDirection(), Move.Direction.LEFT);
+        Assert.assertEquals(best.getDirection(), Move.Direction.LEFT);
         List<Move> moves = mv.getMoves();
         printMoves(movesPossible, moves, best, "out10.png");
     }

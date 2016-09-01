@@ -176,7 +176,7 @@ public class HeadLayer extends View {
     }
 
     private void drawMoveOnBitmap(Move best, Sweet.Type color, Sweet.Type color2, int xReal, int yReal, Bitmap bm, int sweetSize) {
-        switch (best.findDirection()) {
+        switch (best.getDirection()) {
             case UP:
                 setWhitePixelsOnSolution(xReal, xReal + sweetSize, yReal - sweetSize, yReal + sweetSize, bm);
                 Timber.v("UP : %1$d %2$d, %3$s %4$s", xReal, yReal, color, color2);
@@ -217,7 +217,7 @@ public class HeadLayer extends View {
             int xReal = Math.round(x * factorDiminutionSize) / REDUCTION_SIZE;
             int yReal = Math.round(y * factorDiminutionSize) / REDUCTION_SIZE;
 
-            switch (move.findDirection()) {
+            switch (move.getDirection()) {
                 case UP:
                     setBorderPixel(xReal, xReal + sweetSize, yReal - sweetSize, yReal + sweetSize, bm);
                     break;

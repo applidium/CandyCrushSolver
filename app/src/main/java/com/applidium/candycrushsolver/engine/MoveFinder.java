@@ -55,16 +55,16 @@ public class MoveFinder {
     private void checkDirectionUp(Sweet reference, int i, int j) {
         initializeBooleansToFindSpecialMoves();
         checkMatchUpUp(reference, i, j);
-        checkMatchVerticalLeft(reference, i, j);
-        checkMatchVerticalRight(reference, i, j);
+        checkMatchVerticalLeft(reference, i, j, Move.Direction.UP);
+        checkMatchVerticalRight(reference, i, j, Move.Direction.UP);
     }
 
-    private void checkMatchVerticalRight(Sweet reference, int i, int j) {
+    private void checkMatchVerticalRight(Sweet reference, int i, int j, Move.Direction direction) {
         boolean couldBeFourVerticalMove = false;
         if (sameColorOnYourRight(reference, i, j)) {
             if (sameColorOnYourRight(reference, i, j + 1)) {
                 if (!moveAlreadyAdded && !symmetricalMoveDone) {
-                    addThisMove(reference, grid.get(i).get(j));
+                    addThisMove(reference, grid.get(i).get(j), direction);
                     couldBeFourVerticalMove = true;
                 } else if (couldBeAFiveSpecialMove && moveAlreadyAdded) {
                     moves.get(moves.size() - 1).addToScore(3);
@@ -77,7 +77,7 @@ public class MoveFinder {
             }
             if (sameColorOnYourLeft(reference, i, j)) {
                 if (!moveAlreadyAdded && !symmetricalMoveDone) {
-                    addThisMove(reference, grid.get(i).get(j));
+                    addThisMove(reference, grid.get(i).get(j), direction);
                 } else if (couldBeFourVerticalMove && moveAlreadyAdded) {
                     moves.get(moves.size() - 1).addToScore(3);
                 } else if (bombTwoVertical && moveAlreadyAdded) {
@@ -90,12 +90,12 @@ public class MoveFinder {
         }
     }
 
-    private void checkMatchVerticalLeft(Sweet reference, int i, int j) {
+    private void checkMatchVerticalLeft(Sweet reference, int i, int j, Move.Direction direction) {
         boolean couldBeFourVerticalMove = false;
         if (sameColorOnYourLeft(reference, i, j)) {
             if (sameColorOnYourLeft(reference, i, j - 1)) {
                 if (!moveAlreadyAdded && !symmetricalMoveDone) {
-                    addThisMove(reference, grid.get(i).get(j));
+                    addThisMove(reference, grid.get(i).get(j), direction);
                     couldBeFourVerticalMove = true;
                     couldBeAFiveSpecialMove = true;
                 } else if (bombTwoVertical && moveAlreadyAdded) {
@@ -116,7 +116,7 @@ public class MoveFinder {
     private void checkMatchUpUp(Sweet reference, int i, int j) {
         if (sameColorAbove(reference, i, j)) {
             if (sameColorAbove(reference, i - 1, j) && !symmetricalMoveDone) {
-                addThisMove(reference, grid.get(i).get(j));
+                addThisMove(reference, grid.get(i).get(j), Move.Direction.UP);
                 bombTwoVertical = true;
             }
             if (sameColorAbove(reference, i - 1, j) && symmetricalMoveDone && !moveAlreadyAdded && symmetricalDirection == Move.Direction.DOWN) {
@@ -128,14 +128,14 @@ public class MoveFinder {
     private void checkDirectionDown(Sweet reference, int i, int j) {
         initializeBooleansToFindSpecialMoves();
         checkMatchDownDown(reference, i, j);
-        checkMatchVerticalLeft(reference, i, j);
-        checkMatchVerticalRight(reference, i, j);
+        checkMatchVerticalLeft(reference, i, j, Move.Direction.DOWN);
+        checkMatchVerticalRight(reference, i, j, Move.Direction.DOWN);
     }
 
     private void checkMatchDownDown(Sweet reference, int i, int j) {
         if (sameColorUnder(reference, i, j)) {
             if (sameColorUnder(reference, i + 1, j)) {
-                addThisMove(reference, grid.get(i).get(j));
+                addThisMove(reference, grid.get(i).get(j), Move.Direction.DOWN);
                 bombTwoVertical = true;
             }
         }
@@ -144,16 +144,16 @@ public class MoveFinder {
     private void checkDirectionLeft(Sweet reference, int i, int j) {
         initializeBooleansToFindSpecialMoves();
         checkMatchLeftLeft(reference, i, j);
-        checkMatchHorizontalUp(reference, i, j);
-        checkMatchHorizontalDown(reference, i, j);
+        checkMatchHorizontalUp(reference, i, j, Move.Direction.LEFT);
+        checkMatchHorizontalDown(reference, i, j, Move.Direction.LEFT);
     }
 
-    private void checkMatchHorizontalDown(Sweet reference, int i, int j) {
+    private void checkMatchHorizontalDown(Sweet reference, int i, int j, Move.Direction direction) {
         boolean couldBeFourHorizontalMove = false;
         if (sameColorUnder(reference, i, j)) {
             if (sameColorUnder(reference, i + 1, j)) {
                 if (!moveAlreadyAdded && !symmetricalMoveDone) {
-                    addThisMove(reference, grid.get(i).get(j));
+                    addThisMove(reference, grid.get(i).get(j), direction);
                     couldBeFourHorizontalMove = true;
                 } else if (couldBeAFiveSpecialMove && moveAlreadyAdded) {
                     moves.get(moves.size() - 1).addToScore(4);
@@ -166,7 +166,7 @@ public class MoveFinder {
             }
             if (sameColorAbove(reference, i, j)) {
                 if (!moveAlreadyAdded && !symmetricalMoveDone) {
-                    addThisMove(reference, grid.get(i).get(j));
+                    addThisMove(reference, grid.get(i).get(j), direction);
                 } else if (couldBeFourHorizontalMove && moveAlreadyAdded) {
                     moves.get(moves.size() - 1).addToScore(2);
                 } else if (bombTwoHorizontal && moveAlreadyAdded) {
@@ -179,13 +179,13 @@ public class MoveFinder {
         }
     }
 
-    private void checkMatchHorizontalUp(Sweet reference, int i, int j) {
+    private void checkMatchHorizontalUp(Sweet reference, int i, int j, Move.Direction direction) {
         boolean couldBeFourHorizontalMove = false;
         couldBeAFiveSpecialMove = false;
         if (sameColorAbove(reference, i, j)) {
             if (sameColorAbove(reference, i - 1, j)) {
                 if (!moveAlreadyAdded && !symmetricalMoveDone) {
-                    addThisMove(reference, grid.get(i).get(j));
+                    addThisMove(reference, grid.get(i).get(j), direction);
                     couldBeFourHorizontalMove = true;
                     couldBeAFiveSpecialMove = true;
                 } else if (bombTwoVertical && moveAlreadyAdded) {
@@ -206,7 +206,7 @@ public class MoveFinder {
     private void checkMatchLeftLeft(Sweet reference, int i, int j) {
         if (sameColorOnYourLeft(reference, i, j)) {
             if (sameColorOnYourLeft(reference, i, j - 1) && !symmetricalMoveDone) {
-                addThisMove(reference, grid.get(i).get(j));
+                addThisMove(reference, grid.get(i).get(j), Move.Direction.LEFT);
                 bombTwoHorizontal = true;
             }
             if (sameColorOnYourLeft(reference, i, j - 1) && symmetricalMoveDone && !moveAlreadyAdded && symmetricalDirection == Move.Direction.RIGHT) {
@@ -218,28 +218,28 @@ public class MoveFinder {
     private void checkDirectionRight(Sweet reference, int i, int j) {
         initializeBooleansToFindSpecialMoves();
         checkMatchRightRight(reference, i, j);
-        checkMatchHorizontalUp(reference, i, j);
-        checkMatchHorizontalDown(reference, i, j);
+        checkMatchHorizontalUp(reference, i, j, Move.Direction.RIGHT);
+        checkMatchHorizontalDown(reference, i, j, Move.Direction.RIGHT);
     }
 
     private void checkMatchRightRight(Sweet reference, int i, int j) {
         if (sameColorOnYourRight(reference, i, j)) {
             if (sameColorOnYourRight(reference, i, j + 1)) {
-                addThisMove(reference, grid.get(i).get(j));
+                addThisMove(reference, grid.get(i).get(j), Move.Direction.RIGHT);
                 bombTwoHorizontal = true;
             }
         }
     }
 
-    private void addThisMove(Sweet reference, Sweet other) {
+    private void addThisMove(Sweet reference, Sweet other, Move.Direction direction) {
         if (reference == null || other == null || reference.getType() == other.getType()) {
             return;
         }
-        Move move = new Move(reference, other, 1); //score : added later
+        Move move = new Move(reference, other, 1, direction); //score : added later
         moves.add(move);
         moveAlreadyAdded = true;
         symmetricalMoveDone = true;
-        symmetricalDirection = move.findDirection();
+        symmetricalDirection = move.getDirection();
     }
 
     private boolean canGoUp(int i, int j) {
