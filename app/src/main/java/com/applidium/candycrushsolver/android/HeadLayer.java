@@ -10,6 +10,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class HeadLayer extends View {
     private final FrameLayout frameLayout;
     private WindowManager windowManager;
     private ImageView image;
+    private Button quitButton;
 
    private final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -58,6 +60,15 @@ public class HeadLayer extends View {
 
         layoutInflater.inflate(R.layout.head, frameLayout);
         image = (ImageView) frameLayout.findViewById(R.id.solution);
+
+        quitButton = (Button) frameLayout.findViewById(R.id.quit_head);
+        quitButton.setVisibility(GONE);
+
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                destroy();
+            }
+        });
     }
 
     public void destroy() {
@@ -126,6 +137,7 @@ public class HeadLayer extends View {
         image.setImageAlpha(140);
         image.setEnabled(false);
         Timber.v("App cycle : just after display");
+        quitButton.setVisibility(VISIBLE);
     }
 
     private Bitmap createBitmap() {
