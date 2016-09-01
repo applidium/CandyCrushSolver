@@ -210,6 +210,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         if (isRecentFilePresent()) {
             currentlyRecording = true;
         }
+        changeChoiceButton();
         changeIconAccordingToCurrentSettings();
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
