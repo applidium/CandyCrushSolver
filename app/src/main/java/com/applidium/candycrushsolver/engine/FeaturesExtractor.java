@@ -240,7 +240,7 @@ public class FeaturesExtractor {
             if (img != null
                     && img.get(Math.min(yCentral, img.rows()), Math.min(xCentral, img.cols())) != null
                     && img.get(Math.min(yCentral, img.rows()), Math.min(xCentral, img.cols())).length > 0
-                    && isTheSameColor(img, features[colorIndex], Math.min(yCentral, img.rows()), Math.min(xCentral, img.cols()), 45)) {
+                    && isTheSameColor(img, features[colorIndex], Math.min(yCentral, img.rows()), Math.min(xCentral, img.cols()), DIFFERENCE_LIMIT_OTHER)) {
                 grid.get(i).set(j, new Sweet(colorIndex, new Point(x, y)));
                 break;
             }
