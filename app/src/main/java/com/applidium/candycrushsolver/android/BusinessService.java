@@ -139,8 +139,6 @@ public class BusinessService extends Service {
             Mat[] featuresOpenCV = loadFeaturesForOpenCvVersion();
 
             recenterSweet(best, resizeImage, featuresOpenCV);
-            Move opposedMove = new Move(best.getSweet2(), best.getSweet1(), best.getScore());
-            recenterSweet(opposedMove, resizeImage, featuresOpenCV);
 
             Timber.v("App cycle : move just found");
             headLayer.showBestMoveOnScreen(best, density);
@@ -235,6 +233,10 @@ public class BusinessService extends Service {
         int refX = Math.min(xInCroppedImage + Math.max(0, x - SWEET_SIZE), image.cols());
         int refY = Math.min(yInCroppedImage + Math.max(0, y - SWEET_SIZE), image.rows());
 
+        if (Math.abs(refX - x) > FEATURE_SIZE || Math.abs(refY - y) > FEATURE_SIZE) {
+            //cannot be the same sweet
+            return;
+        }
         best.getSweet1().setPosition(new Point(refX, refY));
     }
 
