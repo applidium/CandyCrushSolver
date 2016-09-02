@@ -1,7 +1,11 @@
 # Candy Crush Solver
 
 This is an Android project that solves the game Candy Crush.
-This service scans the grid to find sweets, find the best move for the player and displays it on the screen, on top of Candy Crush. For more information, read here: https://applidium.com/en/news/candy_crush_solver/.
+This service scans the grid to find sweets, find the best move for the player and displays it on the screen, on top of Candy Crush. For more information, read this article: https://applidium.com/en/news/candy_crush_solver/.
+
+You can find a demo [here][youtube].
+
+[youtube]: https://www.youtube.com/watch?v=vTlWZNjslJk&feature=youtu.be
 
 ## Setup
 
