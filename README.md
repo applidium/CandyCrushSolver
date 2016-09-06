@@ -5,7 +5,7 @@ This service scans the grid to find sweets, find the best move for the player an
 
 You can find a demo [here][youtube].
 
-[youtube]: https://www.youtube.com/watch?v=vTlWZNjslJk&feature=youtu.be
+[youtube]: https://youtu.be/NSZ7ULs-EbU
 
 ## Setup
 
